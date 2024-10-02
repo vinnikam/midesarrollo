@@ -4,6 +4,8 @@ import co.ucentral.parqueadero.persistencia.entidades.Vehiculo;
 import co.ucentral.parqueadero.servicios.VehiculoServicio;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.List;
 
@@ -12,7 +14,16 @@ import java.util.List;
 public class VehiculoControlador {
     VehiculoServicio vehiculoServicio;
 
-    public List<Vehiculo> obtenerTodos(){
-        return vehiculoServicio.obtenerTodos();
+    @GetMapping({"/vehiculos"})
+    public String obtenerTodos(Model model){
+        List<Vehiculo> listado =  vehiculoServicio.obtenerTodos();
+        model.addAttribute("misvehiculos",listado);
+        return "pagevehiculos";
     }
+    public List<Vehiculo> obtenerTodos1(){
+        return vehiculoServicio.obtenerTodos();
+
+    }
+
+
 }
